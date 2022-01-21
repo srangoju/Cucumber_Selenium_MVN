@@ -15,25 +15,27 @@ import io.cucumber.java.en.When;
 
 public class test {
     public static WebDriver driver;
-    @Given("^user is on homepage$")
-    public void user_is_on_homepage() throws Throwable {     
+    
+    @Given("user is on homepage")
+    public void user_is_on_homepage() {
     	System.setProperty("webdriver.chrome.driver","F:\\BrowserDrivers\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
     }
-    
-    @When("^user enters \"(.*)\"$")
-    public void user_enters_item_name(String itemName) throws Throwable {
-        driver.findElement(By.xpath("//input[@placeholder='Search for Vegetables and Fruits']")).sendKeys(itemName);
+
+    @When("^user enters itemname$")
+    public void user_enters_item_name() throws Throwable {
+        driver.findElement(By.xpath("//input[@placeholder='Search for Vegetables and Fruits']")).sendKeys("Brocolli");
     }
-    
-   @Then("^entered item should be displayed$")
-    public void entered_item_should_be_displayed() throws Throwable {
+
+    @Then("^entered item should be displayed$")
+    public void entered_item_should_be_displayed() {
     	String exp_message = "Brocolli - 1 Kg";
     	String actual = driver.findElement(By.cssSelector("#root > div > div.products-wrapper > div > div > h4")).getText();
         Assert.assertEquals(exp_message, actual);
-    }     
+    }
+    
    
    @When("^user clicks on add to cart$")
    public void user_clicks_on_add_to_cart() throws Throwable {
