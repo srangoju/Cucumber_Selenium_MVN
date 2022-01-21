@@ -1,15 +1,17 @@
 package seleniumgluecode;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import io.cucumber.java.en.And;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import junit.framework.Assert;
+
+
 
 public class test {
     public static WebDriver driver;
@@ -21,13 +23,13 @@ public class test {
         driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
     }
     
-    @When("^user enters item name$")
-    public void user_enters_items_in_searchbox() throws Throwable {
-        driver.findElement(By.xpath("//input[@placeholder='Search for Vegetables and Fruits']")).sendKeys("Brocolli");
+    @When("^user enters \"(.*)\"$")
+    public void user_enters_item_name(String itemName) throws Throwable {
+        driver.findElement(By.xpath("//input[@placeholder='Search for Vegetables and Fruits']")).sendKeys(itemName);
     }
     
    @Then("^entered item should be displayed$")
-    public void selected_item_is_displayed() throws Throwable {
+    public void entered_item_should_be_displayed() throws Throwable {
     	String exp_message = "Brocolli - 1 Kg";
     	String actual = driver.findElement(By.cssSelector("#root > div > div.products-wrapper > div > div > h4")).getText();
         Assert.assertEquals(exp_message, actual);

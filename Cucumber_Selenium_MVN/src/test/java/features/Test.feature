@@ -3,7 +3,7 @@ Feature: Landing into GreenKart website
 
 	Scenario: Search operation
     Given user is on homepage
-    When user enters item name 
+    When user enters "Brocolli" 
     Then entered item should be displayed
     
   Scenario: Add to Cart
