@@ -1,20 +1,21 @@
 package seleniumgluecode;
 import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
-import org.junit.Assert;
+import junit.framework.Assert;
 
 public class test {
     public static WebDriver driver;
     @Given("^user is on homepage$")
     public void user_is_on_homepage() throws Throwable {     
-    	System.setProperty("webdriver.chrome.driver","C:/Users/X013810/Desktop/chromedriver.exe");
+    	System.setProperty("webdriver.chrome.driver","F:\\BrowserDrivers\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
@@ -22,14 +23,26 @@ public class test {
     
     @When("^user enters item name$")
     public void user_enters_items_in_searchbox() throws Throwable {
-        driver.findElement(By.xpath("//input[@placeholder='Search for Vegetables and Fruits']")).sendKeys("Cucumber");
+        driver.findElement(By.xpath("//input[@placeholder='Search for Vegetables and Fruits']")).sendKeys("Brocolli");
     }
     
    @Then("^entered item should be displayed$")
     public void selected_item_is_displayed() throws Throwable {
-    	String exp_message = "Cucumber - 1 Kg";
-    	String actual = driver.findElement(By.cssSelector("h4[class='product-name']")).getText();
+    	String exp_message = "Brocolli - 1 Kg";
+    	String actual = driver.findElement(By.cssSelector("#root > div > div.products-wrapper > div > div > h4")).getText();
         Assert.assertEquals(exp_message, actual);
-        driver.quit();  
-    }      
+    }     
+   
+   @When("^user clicks on add to cart$")
+   public void user_clicks_on_add_to_cart() throws Throwable {
+       driver.findElement(By.xpath("//button[normalize-space()='ADD TO CART']")).click();
+   }
+   
+  @Then("^item should be added to cart$")
+   public void item_should_be_added_to_cart() throws Throwable {
+   	String exp_message = "[[✔ ]]ADDED";
+   	String actual = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/div/div/div[3]/button")).getText();
+       Assert.assertEquals(exp_message, actual);
+       driver.quit();  
+   }      
 }
