@@ -1,15 +1,14 @@
 package seleniumgluecode;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import junit.framework.Assert;
 
 public class test {
     public static WebDriver driver;
@@ -21,9 +20,9 @@ public class test {
         driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
     }
     
-    @When("^user enters item name$")
-    public void user_enters_items_in_searchbox() throws Throwable {
-        driver.findElement(By.xpath("//input[@placeholder='Search for Vegetables and Fruits']")).sendKeys("Brocolli");
+    @When("^user enters \"(.*)\"$")
+    public void user_enters_items_in_searchbox(String itemname) throws Throwable {
+        driver.findElement(By.xpath("//input[@placeholder='Search for Vegetables and Fruits']")).sendKeys(itemname);
     }
     
    @Then("^entered item should be displayed$")
