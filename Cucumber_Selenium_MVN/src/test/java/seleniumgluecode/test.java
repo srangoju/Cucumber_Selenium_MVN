@@ -24,7 +24,7 @@ public class test {
     @When("^user enters \"(.*)\"$")
     public void user_enters_items_in_searchbox(String itemname) throws Throwable {
         driver.findElement(By.xpath("//input[@placeholder='Search for Vegetables and Fruits']")).sendKeys(itemname);
-
+    }
     @Then("^entered item should be displayed$")
     public void entered_item_should_be_displayed() {
     	String exp_message = "Brocolli - 1 Kg";
